@@ -124,33 +124,6 @@
 \begin{document}
     \maketitle
     \tableofcontents
-    \section{Kruscal Algo}
-    \subsection{Matrix Version Algo}
-
-    \begin{algorithm} 
-	\caption{Kruskal} 
-	\label{alg3} 
-	\begin{algorithmic}
-		\REQUIRE $n \geq 0 \vee x \neq 0$ 
-		\ENSURE $y = x^n$ 
-		\STATE $y \gets 1$ 
-		\IF{$n < 0$} 
-		\STATE $X \gets 1 / x$ 
-		\STATE $N \gets -n$ 
-		\ELSE 
-		\STATE $X \gets x$ 
-		\STATE $N \gets n$ 
-		\ENDIF 
-		\WHILE{$N \neq 0$} 
-		\IF{$N$ is even} 
-		\STATE $X \gets X \times X$ 
-		\STATE $N \gets N / 2$ 
-		\ELSE[$N$ is odd] \STATE $y \gets y \times X$ 
-		\STATE $N \gets N - 1$ 
-		\ENDIF 
-		\ENDWHILE 
-	\end{algorithmic} 
-\end{algorithm}
     \section{Greedy Algorithm}
         \subsection{Sac à dos greedy version}
         \begin{proof}
@@ -190,20 +163,23 @@
         preuve par contradiction: i.e. qu<on suppose $T\pr{c}$ est optimal et c n'est pas l'ordre
         dans lequel on sert les clients en ordre croissant des $t_i$
     \end{proof}
+    \subsection{Kruscal Algo}
+    \subsubsection{Matrix Version Algo}
+    nothing here
 
-\newpage
+
 \section{Programmation dynamique}
 \subsection{Knapsack Problem 2}
     \begin{algorithm} 
-	\caption{\textbf{fonction} knapsack\_dy(w[1..n],v[1..n],W): \textbf{array} V[0..n, 0..W]
+	\caption{\textbf{fonction} knapsack\_dy($w[1..n],v[1..n],W$): \textbf{array} V[0..n, 0..W]
 } 
 	\label{alg_sacados2} 
 	\begin{algorithmic}
 		\REQUIRE $v_{i} > 0, w_{i} > 0, x_{i} \in \left\{ 0,1 \right\}, W \in \mathbb{N}^{*} $ \\
-		\COMMENT{array w[1..n] indicates weights of objects 1 to n, array n[1..n] indicates their values. W is the max weight a sac a dos can bear. Here comes initialisation}
-		\textbf{array} w[1..n] = ??? \\
-		\textbf{array} v[1..n] = ???\\ 
-		\textbf{array} V[0..n,0..W]\\ 
+		\COMMENT{array $w[1..n]$ indicates weights of objects 1 to n, array $n[1..n]$ indicates their values. $W$ is the max weight a knapsack can bear. Here come initialisations:}
+		\textbf{array} $w[1..n] = $??? \\
+		\textbf{array} $v[1..n] =$ ???\\ 
+		\textbf{array} $V[0..n,0..W]$\\ 
 		\textbf{for} $j = 1$ \textbf{to} $W$ \textbf{do} $V\left[ 0,j \right] = 0$\\
 		\COMMENT{establish matrix}
 		\FOR{$i = 1   $  \TO $n$}
@@ -216,4 +192,47 @@
 		\RETURN $V[0..n,0..W]$
 	\end{algorithmic} 
 \end{algorithm}
+\textbf{Et voici les codes:}
+\begin{lstlisting}[language = Python, caption = codes pour knapsack2]
+	
+import time
+import sys
+
+# function from Marc feely
+def createMatrix(numRow,numColumn):
+    result = [None] * numRow
+    for i in range(numRow):
+        result[i] = [0]*numColumn
+    return result
+
+
+# 1. weight，value的index引用全部都-1,因为python的list的index从0开始。。。。
+# 2. matrix include line 0 ( a line filled with 0), but the matrix
+#    in manual don't have line 0 but begin with line 1
+def knapsack_dynamic(weights, values, W_max, waitTime):
+    num_objects = len(weights)
+    V = createMatrix(len(weights)+1,W_max+1) 
+    for j in range(1,W_max+1): V[0][j] = 0
+    for i in range(1,num_objects+1):
+        for j in range(0, W_max+1):
+            if (j-weights[i-1] < 0): 
+                V[i][j] = V[i-1][j]
+            else: 
+                V[i][j] = max(V[i-1][j],V[i-1][j-weights[i-1]]+values[i-1])
+            
+            print(V[i][j], "\t", end = "")
+            sys.stdout.flush()
+            time.sleep(waitTime)
+        print("\n")
+
+            
+    print(V)
+
+knapsack_dynamic([1,2,5,6,7],[1,6,18,22,28],11,1)
+\end{lstlisting}
+
+\section{Divide and Conquer}
+
+
+
     \end{document}
