@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Kruscal Algo}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Matrix Version Algo}{1}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Greedy Algorithm}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Sac à dos greedy version}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}File d'attente}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Programmation dynamique}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Knapsack Problem 2}{2}{subsection.3.1}%

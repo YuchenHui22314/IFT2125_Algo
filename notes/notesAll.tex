@@ -1,0 +1,217 @@
+\documentclass{article}
+
+%=============================================
+%===       importation des packages.        ==
+%=============================================
+\usepackage{tabularx, makecell, multirow }
+\usepackage{syntonly}
+%hpyerlien
+\usepackage{hyperref}
+%utf8
+\usepackage[utf8]{inputenc}
+%to solve footnote too high 
+%(this helps fix footnote to bottom of the page)
+\usepackage[bottom]{footmisc}
+%array: aimed at tabular
+\usepackage{array}
+% sanxianbiao
+\usepackage{booktabs}
+% graphics
+\usepackage{graphicx}
+%math
+\usepackage{amsmath}
+\usepackage{amsthm}
+%Algo
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%code
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[]{amssymb}
+
+%=============================================
+%===            Code config                 ==
+%=============================================
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+%++++++++++++++++ end config code +++++++++++
+\lstset{style=mystyle}
+
+%=============================================
+%===       Définition des environnements.   ==
+%=============================================
+\newtheorem{theoreme}{Théorème}
+\newtheorem*{theoreme*}{Théorème}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem*{lemme*}{Lemme}
+\newtheorem{corollaire}{Corollaire}
+\newtheorem*{corollaire*}{Corollaire}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\newtheorem*{definition*}{Définition}
+\newtheorem{notation}{Notation}
+\newtheorem*{notation*}{Notation}
+\newtheorem{exercice}{Exercice}
+\newtheorem*{exercice*}{Exercice}
+\newtheorem{probleme}{Problème}
+\newtheorem*{probleme*}{Problème}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem*{solution}{Solution}
+\newtheorem*{code}{Code}
+
+\theoremstyle{remark}
+\newtheorem{exemple}{Exemple}[section]
+\newtheorem*{exemple*}{Exemple}
+\newtheorem{remarque}{Remarque}[section]
+\newtheorem*{remarque*}{Remarque}
+\newtheorem*{enigme}{Énigme}
+
+%=============================================
+%===       Définition des new commands.     ==
+%=============================================
+% Notation -- délimiteurs :
+\newcommand{\ac}[1]{\left\{ #1 \right\}} 
+% accolades
+\newcommand{\pr}[1]{\left( #1 \right)} 
+% parenthèses
+\newcommand{\ct}[1]{\left[ #1 \right]} 
+% crochets
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert} 
+% norme
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} 
+% partie entière
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil} 
+% partie entière + 1
+\newcommand{\cond}{\ \middle\vert \ }
+
+
+\title{\textbf{IFT2125 Notes}}
+\author{Yuchen Hui 20150470}
+\date{\today}
+
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \section{Kruscal Algo}
+    \subsection{Matrix Version Algo}
+
+    \begin{algorithm} 
+	\caption{Kruskal} 
+	\label{alg3} 
+	\begin{algorithmic}
+		\REQUIRE $n \geq 0 \vee x \neq 0$ 
+		\ENSURE $y = x^n$ 
+		\STATE $y \gets 1$ 
+		\IF{$n < 0$} 
+		\STATE $X \gets 1 / x$ 
+		\STATE $N \gets -n$ 
+		\ELSE 
+		\STATE $X \gets x$ 
+		\STATE $N \gets n$ 
+		\ENDIF 
+		\WHILE{$N \neq 0$} 
+		\IF{$N$ is even} 
+		\STATE $X \gets X \times X$ 
+		\STATE $N \gets N / 2$ 
+		\ELSE[$N$ is odd] \STATE $y \gets y \times X$ 
+		\STATE $N \gets N - 1$ 
+		\ENDIF 
+		\ENDWHILE 
+	\end{algorithmic} 
+\end{algorithm}
+    \section{Greedy Algorithm}
+        \subsection{Sac à dos greedy version}
+        \begin{proof}
+            Supposons que les objets sont numerotes par ordre
+            decroissant de valeur par unite de poids, i.e.
+            $$\frac{v1}{w1} \geq\frac{v2}{w2}... $$
+            par l'algorithme vorace. SI tous les $x_i = 1$,alors la solution
+            est trivialement optimale.
+
+            Sinon,soit j le plus petit indice tel que $x_j < 1$, on a 
+            alors que $x_i = 1, \forall i <j$ et $x_i  = 0, \forall i >j$
+            et $\sum_{i=1}^n x_iw_i = W$.
+
+            Soit $V\pr{x}\sum_{i=1}^n x_iv_i $, la valeur de la soluttion X
+            on doit demontrer que $V\pr{x}$ est maximale.
+
+            Soit $Y = \pr{x_1,x_2,...,x_n}$  une autre solution de probleme et soit $V\pr{y}$ sa valeur.
+            comme Y est une solution , $0 \leq y_i \leq 1 ,\forall i $et$ \sum_{i=1}^n y_iw_i = W$
+            
+            On veut montrer que $V\pr{x} - V\pr{y} \geq 0$ et alors X sera la solution optimale
+            Soit j le plus petit indice tel que $x_j < 1$ 
+            si i <j, alors $\frac{v_i}{w_i} \geq\frac{v_j}{w_j}  et x_i = 1$
+
+        
+
+
+
+        \end{proof}
+    \subsection{File d'attente}
+    Strategie vorace: classe les clients par ordre croissant des ti et executer les taches dans cet ordre
+    \begin{proof}
+        Soit n clients ordonne arbitrairement est servit selon l'ordre
+        c = 1,2,3,..,n
+        
+        Le temps total de service requit est $T\pr{c} = t_1+ \pr{r+1+t_2}...+ = nt_1 + \pr{n-1}t_2 +...+ t_n$
+
+        preuve par contradiction: i.e. qu<on suppose $T\pr{c}$ est optimal et c n'est pas l'ordre
+        dans lequel on sert les clients en ordre croissant des $t_i$
+    \end{proof}
+
+\section{Programmation dynamique}
+\subsection{Knapsack Problem 2}
+    \begin{algorithm} 
+	\caption{\textbf{fonction} knapsack\_dy(w[1..n],v[1..n],W): \textbf{array} V[0..n, 0..W]
+} 
+	\label{alg_sacados2} 
+	\begin{algorithmic}
+		\REQUIRE $v_{i} > 0, w_{i} > 0, x_{i} \in \left\{ 0,1 \right\}, W \in \mathbb{N}^{*} $ \\
+		\COMMENT{array w[1..n] indicates weights of objects 1 to n, array n[1..n] indicates their values. W is the max weight a sac a dos can bear. Here comes initialisation}
+		\textbf{array} w[1..n] = ??? \\
+		\textbf{array} v[1..n] = ???\\ 
+		\textbf{array} V[0..n,0..W]\\ 
+		\textbf{for} $j = 1$ \textbf{to} $W$ \textbf{do} $V\left[ 0,j \right] = 0$
+		\FOR{$i = 1   $  \TO $n$}
+		\FOR{$j = 1   $  \TO $W$}
+		\STATE $V[i,0] \gets$ \textbf{if} $j<0 $ \textbf{then} -1 
+		%\STATE \qquad\qquad\;\textbf{if} $i=1$ \textbf{then}  
+		\STATE \qquad\qquad\;\textbf{else} $V\left[ i,j \right] = \text{max}\left( V[i-1,j], V[i-1,j-w[i]] + v[i] \right) $
+		\ENDFOR
+		\ENDFOR
+		\RETURN $V[0..n,0..W]$
+	\end{algorithmic} 
+\end{algorithm}
+    \end{document}

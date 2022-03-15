@@ -1,0 +1,312 @@
+
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wasysym}
+\usepackage{moreverb}
+\usepackage{comment}
+\usepackage{cancel}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{MnSymbol}
+\usepackage{mathtools}
+\usepackage[]{hyperref}
+%\usepackage{minted}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\newcommand\binuparrow{\mathbin{\uparrow}}
+\newcommand{\notdivides}{\nmid}
+
+\title{Devoir 1}
+\author{Yuchen Hui 20150470, Yan Zhuang 20146367}
+
+\begin{document}
+
+\maketitle
+\section{Q1}
+\subsection{a)}
+Faux.
+\begin{proof}
+	
+ Voici un contre-exemple. Soit
+\[
+f_1 = 3x, f_2 = 2x, g_1 = x^2+1, g_2 = x^2. 
+\] 
+On voit bien que
+\[
+3x \in \mathcal{O} \left ( x^2+1 \right ) \text{ et } 2x \in \mathcal{O} \left ( x^2 \right ) 
+.\] 
+Cependant nous avons  
+$$f_1-f_2 = x \not\in \mathcal{O}\left( x^2+1-x^2 \right) = \mathcal{O}\left( 1 \right), $$
+ce qui contredit l'énoncé $f_1\in \mathcal{O}\left( g_1 \right) \land f_2\in \mathcal{O}\left( g_2 \right) \implies f_1-f_2 \in \mathcal{O}\left( g_1-g_2 \right) $
+
+\end{proof}
+\subsection{b)}
+Vrai.
+\begin{proof}
+	\begin{align*}
+		&\exists k\in \mathbb{N}^{*}, \forall n > k \left[ f_1\left( n \right) \le f_2\left( n \right) \right]  \\
+		& \implies\forall n>k, \left[f_1\left( n \right) + f_2\left( n \right) \le 2f_2 \left( n \right) \right]\\
+		& \implies\exists c\in \mathbb{R}^{+}, k \in \mathbb{N}^{*},\forall n>k, \left[f_1\left( n \right) + f_2\left( n \right) \le cf_2 \left( n \right) \right]
+	.\end{align*}
+	Donc d'après la définition de la notation big O, nous concluons que $f_1\left( n \right) +f_2\left( n \right) \in \mathcal{O} \left ( f_2\left( n \right)  \right ). $
+\end{proof}
+
+
+
+
+\newpage
+\section{Q2}
+\subsection{a)}
+\begin{align*}
+    \frac{an^k}{\log_3 n} =& a \cdot \frac{n^k}{\log_3 n} \\
+    \leq& a \cdot \frac{n^k}{\log_3 n} \cdot \log_3n (\forall n > 1) \\
+    \leq& a \cdot n^k \\
+    \in& O(n^k) 
+\end{align*}
+
+On doit toutefois prouver que $\frac{an^k}{\log_3 n} \notin \Omega(n^k)$ afin d'arriver à la conclusion que $\frac{an^k}{\log_3 n} \notin \Theta(n^k)$ 
+
+Supposons que $\frac{an^k}{\log_3 n} \in \Omega(n^k)$, cela veut dire qu'on peut trouver un constant $c > 0$ que $\frac{an^k}{\log_3 n} \geq c \cdot n^k$
+
+\begin{align*}
+    \frac{an^k}{\log_3 n} \geq& c \cdot n^k \\
+    \frac{a}{\log_3 n} \geq& c \\
+    \frac{1}{\log_3 n} \geq& \frac{c}{a}
+\end{align*}
+
+Si c'est vrai, l'équation devrait être vrai pour tout $n$. Mais c'est évident ici, vu que $\frac{c}{a}$ est un constant, il exist un $n$ qui viole cette contrainte. Donc, on arrive à une contradiction. Cela veut dire que $\frac{an^k}{\log_3 n} \notin \Omega(n^k)$, qui veut donc dire $\frac{an^k}{\log_3 n} \notin \Theta(n^k)$ 
+
+\subsection{b)}
+
+\begin{align*}
+    2^{n+a} =& 2^n \cdot 2^a \\
+    \leq&  c \cdot 2^n (\forall c | c \geq 2^a) \\
+    \in& O(2^n)
+\end{align*}
+
+\subsection{c)}
+Supposons, par contradiction, que $2^{2n+1} \in O(2^n)$, selon la définition, on peut trouver un $c > 0 | 2^{2n+1} \leq c \cdot 2^n$. Toutefois, on a les transformations suivantes
+\begin{align*}
+    2^{2n} \cdot 2 \leq& c \cdot 2^n \\
+    2^{2n} \leq& c \cdot 2^{n-1} \\
+    \frac{2^{2n}}{2^{n-1}} \leq& c \\
+    2^{n+1} \leq& c 
+\end{align*}
+
+Si notre hypothèse est correcte, alors une fois que l'on fixe un $c$, cette équation devrait être correct pour n'importe quel $n$. Toutefois, on voit que ce n'est clairement pas le cas. On peut toujours trouver un $n$ qui va violer cette équation (Avec un $c$ fixé)
+
+Par conséquent, on arrive à une contradiction. Cela veut dire que $2^{2n+1} \in O(2^n)$
+\subsection{d)}
+Celui-ci est plus facile à prouver avec une preuve par induction. 
+
+Afin de prouver que $2^n \in O(n!)$, cela veut dire que l'on peut trouver un constant $c$ tel que $2^n \leq c \cdot n!$ pour $\forall n, n \geq n_0$. Pour faciliter la preuve, pour le cas de base, on choisit $n_0 = 1, c = 2, n = n_0$
+
+Pour le cas de base, on a donc:
+\begin{equation*}
+    2^1 \leq 2 \cdot 1 
+\end{equation*}
+
+On voit clairement que cette équation est bien valide. Cela veut dire que l'hypothèse est vrai pour $n_0 = 1$. Toutefois, afin de pouvoir conclure que $2^n \in O(n!)$, il faut que l'hypothèse est vrai pour tout $n | n \geq n_0$ pour un $c$ fixé.
+
+On suppose que c'est vrai pour tout $n, n \geq n_0$, on doit prouver que $n+1$ est vrai aussi. On a donc:
+\begin{align*}
+    2^{n+1} \leq& c \cdot (n+1)!
+\end{align*}
+On voit que à la gauche, on multiple l'équation par $2$. Toutefois, à la droite, on multiple l'équation par $(n+1)$ qui est, par notre hypothèse, au moins 2. Donc cette inégalité est toujours vrai. Donc, c'est vrait pour tout $n \geq n_0$ avec un $c$ fixé.
+
+On peut donc conclure maintenant que $2^n \in O(n!)$.
+\subsection{e)}
+
+Si on suppose que $n! \in O(2^n)$, cela veut dire que $n! \leq c \cdot 2^n$ pour un $c$ fixé avec $n \geq n_0$
+
+Toutefois, on ne peut pas trouver un tel $c$. On a:
+\begin{align*}
+    n! \leq& c \cdot 2^n \\
+    \frac{n!}{2^n} \leq& c
+\end{align*}
+
+Sans utiliser la règle de limite, on doit montrer qu'il existe pas une borne supérieur pour $\frac{n!}{2^n}$. On a:
+\begin{align*}
+    \frac{n!}{2^n} =& \frac{n}{2} \cdot \frac{n-1}{2} \cdot \dots \cdot \frac{2}{2} \cdot \frac{1}{2} \\
+    \geq& \frac{n}{2} \cdot \frac{1}{2} \\
+    =& \frac{n}{4}
+\end{align*}
+
+On voit que $\frac{n}{4}$ n'est jamais décroissant (non borné), et vu qu'on a $\frac{n!}{2^n} \geq \frac{n}{4}$, $\frac{n!}{2^n}$ est aussi non borné. Cela veut dire que l'on ne peut jamais trouver un $c$ fixé pour que $n! \leq c \cdot 2^n$ pour tout $n \geq n_0$.
+
+Cela veut dire aussi que $n! \notin O(2^n)$
+\newpage
+\section{Q3}
+\subsection{a)}
+On a $f(n) = \frac{n^2}{ln(n)}, g(n) = n \cdot \sqrt{n}$ On applique la règle de la limite
+\begin{align*}
+    \lim_{n->\infty} \frac{\frac{n^2}{\ln(n)}}{n \cdot \sqrt{n}} =&  \lim_{n->\infty} \frac{n^2}{\ln(n) \cdot n \cdot \sqrt{n}} \\
+    =& \lim_{n->\infty} \frac{n^2}{n^{\frac{3}{2}}\cdot \ln(n)} \\
+    =& \lim_{n->\infty} \frac{n^{\frac{1}{2}}}{\ln(n)} \\
+    =& \lim_{n->\infty} \frac{1}{2}n^{\frac{1}{2}} \text{ (L.H) }\\
+    =& \infty
+\end{align*}
+
+En utilisant la règle de limite, on arrive à un résultat de $\infty$. Donc, on peut conclure que $g(n) \in O(f(n))$
+
+\subsection{b)}
+On a $f(n) = ln(\sqrt{n}), g(n) = ln(n)$. On applique la règle de limite
+\begin{align*}
+    \lim_{n->\infty} \frac{\ln(\sqrt{n})}{\ln(n)} =& \frac{1}{2} \lim_{n->\infty} \frac{\frac{1}{n}}{\frac{1}{n}} \\
+    =& 1
+\end{align*}
+
+On arrive à un résultat d'un entier constant, on peut conclure que $f(n) \in \Theta(g(n))$
+
+\subsection{c)}
+On a $f(n) = n^a, g(n) = 2^{\sqrt{ln(n)}}$. On applique la règle de limite
+\begin{align*}
+    y =& \lim_{n->\infty} \frac{n^a}{2^{\sqrt{ln(n)}}} \\
+    \ln(y) =& \lim_{n->\infty} \ln \left( \frac{n^a}{2^{\sqrt{ln(n)}}} \right) \\
+    \ln(y) =& \lim_{n->\infty} \left( \ln(n^a) - \ln(2^{\sqrt{ln(n)}})\right) \\
+    \ln(y) =& \lim_{n->\infty} \left( a\ln(n) - \sqrt{\ln(n)}\ln(2)\right) \\
+    \ln(y) =& \lim_{n->\infty} \left( \frac{a^2\cdot \ln^2(n) - \ln(n)\cdot \ln^2(2)}{a\ln(n) + \sqrt{\ln(n)}\ln 2} \right) \\
+     \ln(y) =& \lim_{n->\infty} \left(  \frac{2a^2\cdot \ln(n) \cdot \frac{1}{n} - \ln^2(2) \cdot \frac{1}{n}}{a \cdot \frac{1}{n} + \frac{1}{2} \cdot \frac{1}{\sqrt{\ln(n)}} \cdot \frac{1}{n}\ln 2} \right) \text{ (L.H)} \\
+     \ln(y) =& \lim_{n->\infty} \left(  \frac{2a^2\cdot \ln(n)- \ln^2(2)}{a + \frac{1}{2} \cdot \frac{1}{\sqrt{\ln(n)}} \cdot \ln 2} \right) \\
+     \ln(y) =&   \frac{2a^2\cdot \ln(\infty)- \ln^2(2)}{a + \frac{1}{2} \cdot \frac{1}{\sqrt{\ln(\infty)}} \cdot \ln 2}  \\
+     \ln(y) =& \frac{\infty}{a} \\
+     \ln(y) =& \infty \\
+     y =& e^\infty \\
+     y =& \infty
+\end{align*}
+On arrive à un résultat d'une infinité, on peut conclure que $g(n) \in O(f(n))$
+\newpage
+\section{Q4}
+\subsection{a)}
+
+Pour faciliter le calcul, on post $t_i = T(2^i)$ par remplaçer n par $2^i$. On a donc une formule de récurrence:
+\begin{equation*}
+    t_i = \frac{3}{2}t_{i-1} - \frac{1}{2}t_{i-2} + 2^{i}, i \neq 1
+\end{equation*}
+
+On a la transformation suivante:
+\begin{align*}
+    t_i - \frac{3}{2}t_{i-1} + \frac{1}{2}t_{i-2} = 2^i
+\end{align*}
+
+Ici, $b = 2, p(n) = 1$ de degré de $0$. En utilisant la formule $(4.10)$ du livre, on obtient la polynôme caractéristique suivante:
+\begin{equation*}
+    (x^2-\frac{3}{2}x+\frac{1}{2})(x-2),
+\end{equation*}
+soit
+ \[
+	 (x-\frac{1}{2})(x-1)(x-2)
+.\] 
+Par conséquent, les racines sont $x_1=\frac{1}{2}, x_2 = 1, x_3 = 2$, dont la multiplicite sont tous 1. Donc on a une formule de récurrence ayant la forme suivante:
+\begin{equation*}
+	t_i  = c_1\left( \frac{1}{2} \right) ^{i} + c_2 + c_3 2^{i}.
+\end{equation*}
+En appliquant $n = 2^{i}$, on obtient
+\[
+T(n) = c_1\frac{1}{n}1+c_2+c_3n
+.\] 
+On peut utiliser les conditions initiales pour trouver les constants
+\begin{align*}
+	T(1) &= 1, T(2) = \frac{3}{2} T(4) = \frac{3}{2} 
+\end{align*}
+
+Donc, on a quatre équations, assez pour déterminer chaque constant
+\begin{align*}
+    c_3 + c_4 =& 1 \\
+    c_1 + c_2 + c_3 + \frac{1}{2}c_4 =& \frac{3}{2} \\
+    4c_1 + 2c_2 + c_3 + \frac{1}{4}c_4 =& \frac{23}{4} \\
+    9c_1 + 3c_2 + c_3 + \frac{1}{8}c_4 =& \frac{127}{8}
+\end{align*}
+Après la résolution du syèteme on obtient:
+\begin{equation*}
+    t_i = 4i^2 - 12i + 18 - 17 \cdot \left( \frac{1}{2} \right)^i 
+\end{equation*}
+\begin{align*}
+    2^i =& n \iff i = \log_2 n \\
+    T(n) =& 4\log_2^2n-12\log_2n - 17 \cdot \left( \frac{1}{2} \right)^{\log_2 n} + 18 \\
+    =& 4\log_2^2n-12\log_2n - 17 \cdot \frac{1}{n} + 18 \\
+    \leq & 4 \log_2^2n + 18 \log_2^2 n \\
+    =& 22 \log_2^2 n \\
+    T(n) \in& O(\log_2^2 n | n \text{ est une puissance de 2}) 
+\end{align*}
+\subsection{b)}
+
+Pour arriver à la conslusion que $T(n) \in O(\log_2^2 n) \forall n$, on doit d'abord prouver que $T(n)$ est e.n.d. On peut analyser le dérivée pour voir s'il peut être non-décroissant à partir d'une certaine indice.
+
+\begin{align*}
+    \frac{d}{dn} \left(4\log_2^2n \right) - \frac{d}{dn} \left(12\log_2n\right) - \frac{d}{dn} \left(17 \cdot \frac{1}{n}\right) =& \frac{8\log_2n}{n \ln(2)} - \frac{12}{n \ln(2)} + \frac{17}{n^2} \\
+    =& \frac{8\log_2n-12}{n\ln(2)} + \frac{17}{n^2} 
+\end{align*}
+
+On voit clairement que tant que c'est possible de trouver une indice à partir de laquelle, le dérivé de $T(n)$ sera strictement positive cela implique que la fonction $T(n)$ est e.n.d \\
+
+On doit aussi prouver que $\log_2^2n$ est une fonction lisse. On essaie de prouver que $f(2n) \in O(\log_2^2 n)$
+\begin{align*}
+    f(2n) =& \log_2^2 (2n) \\
+    =& \log_2^22 + \log_2^2 n \\
+    =& 1 + \log_2^2 n \\
+    \leq& \log_2^2 n + \log_2^2 n \\
+    =& 2\log_2^2n\\
+    \in& O(\log_2^2 n)
+\end{align*}
+
+Vu qu'on a prouvé que $T(n)$ est e.n.d et que $\log_2^2n$ est une fonction lisse, on peut arriver à la conslusion que $T(n) \in O(\log_2^2n) \forall n$
+
+\newpage
+
+\section{Q5}
+\subsection{a)}
+Cette approche gloutonne n'est pas optimale.Voici un contre-exemple: 
+
+
+Soit $e_1$, $e_2$, $e_3$ les trois événements à considérer, et la liste déjà triée $L_{E}$ = [ $e_1$  ( d = 5 Janvier, f = 8 Janvier ), $e_2$  ( d = 1 Janvier, f = 6 Janvier ), $e_3$  t( d = 7 Janvier, f = 6 May )    ] . Après l'éxecution de l'algorithme, on obtiendra S = $\{e_1\} $ et R = $\{e_2,e_3\} $, car $e_1$ est l'événement dont la durée est la moindre, puis malheuresement il existe des chevauchements des périodes entre $e_1$,$e_2$ et $e_3$. Cependant on constate que la solution optimale dans notre cas sera $S^{*} = \{e_2,e_3\} $, dont la cardinalité est plus grande que celle de S qui est choisi par notre algorithme a. Donc l'approche n'est pas optimale.
+\subsection{b)}
+Cette approche gloutonne n'est pas optimale.Voici un contre-exemple assez extrême:
+
+Soit $e_1$, $e_2$, $e_3$ trois événements à considérer, et la liste déjà triée $L_{E}$ = [ $e_1$  ( d = 1 Janvier, f = 31 Decembre ), $e_2$  ( d = 2 Janvier, f = 4 Janvier ), $e_3$  t( d = 5 Janvier, f = 6 Janvier t)    ] . Après l'éxecution de l'algorithme, on obtiendra S = $\{e_1\} $ et R = $\{e_2,e_3\} $, tout simplement à cause du fait que $e_1$ commence le premier et il est en conflit avec tant $e_1$ que $e_2$. Cependant on constate que la solution optimale dans notre cas sera $S^{*} = \{e_2,e_3\} $, dont la cardinalité est plus grande que celle de S qui est choisi par notre algorithme b. Donc l'approche n'est pas optimale.
+\newline
+
+\subsection{c)}
+Cette approche gloutonne est bien optimale. Voici une preuve par induction:
+
+\begin{proof}
+	Nous allons montrer le prédicat 
+	\[
+	P(n): \forall n \in \mathbb{N}^{*}, \text{si n événements sont choisis par algorithme c, alors ces n événements forment une solution optimale}
+	.\] 	
+	par induction sur n. 
+	\begin{description}
+		\item[Base d'induction.] $n = 1$. Supposons qu'il existe m événements à considérer, alors l'algorithme $\underline{c}$ a choisi l'événement qui finit le plus tôt. Dénotons cet événement par $e_1$. On a que tout événement autre que $e_1$ est rejeté par l'algorithme à cause des conflits d'horaire, donc leurs dates de début sont tous plus tôt que $f_{e_1}$. En même temps, leurs dates de fin sont tous plus tard que $f_{e_1}$. En conséquence, nous concluons qu'au jour $f_{e_1}$, tout événement autre que $e_1$ se produira. Finalement, ces m événements sont en conflit l'un avec l'autre, donc nous ne pouvons choisir qu'un événement pendant l'année en tout cas, ce qui implique que P(1) est vrai. 
+		\item[Hypothèse d'induction.] Supposons que $P(k)$ est vrai.
+		\item[Étape d'induction] Considérons maintenant le cas $k+1$. Maintenant, notre algorithme $\underline{c}$ a déjà choisi $k+1$ événements, dont l'événement $e_1$ fait partie ($e_1$ est l'événement qui finit le plus tôt). L'idée de preuve sera de voir le processus de sélection de ces  $k+1$ événements en deux étapes: 1) choisir $e_1$, 2) choisir $k$ événements en fonction de notre algorithme $c$. L'étape 2) est déjà optimale grâce à l'hypothèse d'induction. 
+		\newline	
+
+		Maintenant, le problème est, si nous pouvons toujours obtenir une solution optimale en choisissant $e_1$ à la première étape. Si nous pouvons prouver la proposition suivante: 
+		\begin{align}
+			\text{Il existe sûrement une solution optimale dans laquelle $e_1$ est le premier événement}, \label{proposition1}
+		\end{align} 
+		alors la question de chercher une solution optimale sera réduite à: 1) choisir $e_1$ 2) Arranger le plus d'événements possibles après le jour $f_{e_1}$. Si nous appliquons algorithme c à étape 2), l'optimalité pourrait être garantie et nous obtienderons une solution optimale. Dans ce cas, nous trouverons que la solution trouvée par les deux étapes combinées est belle et bien les $k+1$ événements obtenus par l'algorithme c. Comme cela nous pourrions conclure que $P(k+1)$ est vrai.
+\newline
+
+		Pour voir la véracité de la proposition \ref{proposition1}, considérons une arbitraire solution optimale $S^{'}$ qui n'include pas $e_1$, nous allons voir nous pourrions toujours la transformer en une solution (aussi optimale) commançant par $e_1$. La méthode consiste à remplaçer le premier événement $e_{1}^{'}$ de $S^{'}$ par $e_1$. Ce changement ne causera aucun conflit avec d'autres événements dans $S^{'}$, parce que tout autre événement se produit après $f_{e_1^{'}}$ et $f_{e_1^{'}} \ge f_{e_1}$, donc après $e_1$. Maintenant, nous avons obtenu une solution optimale commançant par $e_1$. 
+	\end{description} 	
+\end{proof}
+
+
+
+\newpage
+\end{document} 
