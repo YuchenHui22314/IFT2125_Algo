@@ -191,6 +191,7 @@
         dans lequel on sert les clients en ordre croissant des $t_i$
     \end{proof}
 
+\newpage
 \section{Programmation dynamique}
 \subsection{Knapsack Problem 2}
     \begin{algorithm} 
@@ -203,10 +204,11 @@
 		\textbf{array} w[1..n] = ??? \\
 		\textbf{array} v[1..n] = ???\\ 
 		\textbf{array} V[0..n,0..W]\\ 
-		\textbf{for} $j = 1$ \textbf{to} $W$ \textbf{do} $V\left[ 0,j \right] = 0$
+		\textbf{for} $j = 1$ \textbf{to} $W$ \textbf{do} $V\left[ 0,j \right] = 0$\\
+		\COMMENT{establish matrix}
 		\FOR{$i = 1   $  \TO $n$}
 		\FOR{$j = 1   $  \TO $W$}
-		\STATE $V[i,0] \gets$ \textbf{if} $j<0 $ \textbf{then} -1 
+		\STATE $V[i,j] \gets$ \textbf{if} $j-w[i]<0 $ \textbf{then} $V[i-1,j]$ 
 		%\STATE \qquad\qquad\;\textbf{if} $i=1$ \textbf{then}  
 		\STATE \qquad\qquad\;\textbf{else} $V\left[ i,j \right] = \text{max}\left( V[i-1,j], V[i-1,j-w[i]] + v[i] \right) $
 		\ENDFOR
