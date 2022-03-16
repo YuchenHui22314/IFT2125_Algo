@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.10.20)  15 MAR 2022 15:16
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.10.20)  16 MAR 2022 14:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -434,12 +434,16 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 ]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 175.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 176.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 196.
- [2]
+Overfull \hbox (0.25677pt too wide) in paragraph at lines 173--197
+\TU/lmr/m/n/10 Time complexity: $\OMS/cmsy/m/n/10 O [] []O []$\TU/lmr/m/n/10 for
+ []
+
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 197.
+[2]
 Missing character: There is no ， (U+FF0C) in font [lmmono8-regular]:!
 Missing character: There is no 的 (U+7684) in font [lmmono8-regular]:!
 Missing character: There is no 引 (U+5F15) in font [lmmono8-regular]:!
@@ -458,17 +462,17 @@ Missing character: There is no 。 (U+3002) in font [lmmono8-regular]:!
 Missing character: There is no 。 (U+3002) in font [lmmono8-regular]:!
 Missing character: There is no 。 (U+3002) in font [lmmono8-regular]:!
 Missing character: There is no 。 (U+3002) in font [lmmono8-regular]:!
- [3] (./notesAll.aux)
+ [3] [4] (./notesAll.aux)
 Package rerunfilecheck Info: File `notesAll.out' has not changed.
-(rerunfilecheck)             Checksum: 3172C7693DF4C492B1BDC856AAC1CFCD;1189.
+(rerunfilecheck)             Checksum: 459BBA3A97A42E89269873A1F6B0D2B8;1368.
  ) 
 Here is how much of TeX's memory you used:
- 11512 strings out of 476919
- 165115 string characters out of 5821839
- 844592 words of memory out of 5000000
- 31317 multiletter control sequences out of 15000+600000
+ 11514 strings out of 476919
+ 165157 string characters out of 5821839
+ 1044609 words of memory out of 5000000
+ 31319 multiletter control sequences out of 15000+600000
  410272 words of font info for 69 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,6n,77p,243b,1923s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,7n,77p,243b,1923s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on notesAll.xdv (3 pages, 60244 bytes).
+Output written on notesAll.xdv (4 pages, 85244 bytes).
