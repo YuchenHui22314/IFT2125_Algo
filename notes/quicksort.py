@@ -1,0 +1,1 @@
+def pivotage(liste, pivot):
